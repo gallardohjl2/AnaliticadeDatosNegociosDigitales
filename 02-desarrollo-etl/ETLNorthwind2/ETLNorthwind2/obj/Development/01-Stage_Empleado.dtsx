@@ -1,0 +1,1602 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/20/2025 2:33:44 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="TI-JOSEHERRERA0"
+  DTS:CreatorName="TI-JOSEHERRERA0\galla"
+  DTS:DTSID="{03345B43-EB5B-4F0E-929D-716C8F230BA1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="2058"
+  DTS:ObjectName="01-Stage_Empleado"
+  DTS:PackageType="5"
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{E2BE5D4D-E665-4703-8630-83A57A31DAEC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.NORTHWND]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C0EF499F-7E44-4B1C-AE16-DF59C555E30A}"
+      DTS:ObjectName="LocalHost.NORTHWND">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=NORTHWND;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-01-Stage_Empleado-{C0EF499F-7E44-4B1C-AE16-DF59C555E30A}LocalHost.NORTHWND;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.stage_northwind]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9E86D070-FAEA-4832-9904-E09D82893B99}"
+      DTS:ObjectName="LocalHost.stage_northwind">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=stage_northwind;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-01-Stage_Empleado-{9E86D070-FAEA-4832-9904-E09D82893B99}LocalHost.stage_northwind;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\CARGA_STAGE_EMPLEADO"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{E82AAE02-03AF-4EBE-966E-30A8FA815562}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CARGA_STAGE_EMPLEADO"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversión de datos;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversión de datos"
+              name="Conversión de datos"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Inputs[Entrada de conversión de datos]"
+                  name="Entrada de conversión de datos">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="FirstName"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="LastName"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación].Columns[LastName]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Outputs[Salida de conversión de datos]"
+                  exclusionGroup="1"
+                  name="Salida de conversión de datos"
+                  synchronousInputId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of FirstName]"
+                      name="Copy of FirstName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación].Columns[FirstName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of LastName]"
+                      name="Copy of LastName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación].Columns[LastName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Outputs[Salida de error de conversión de datos]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de conversión de datos"
+                  synchronousInputId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA_STAGE_EMPLEADO\División condicional"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="División condicional;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Enruta filas de datos a diferentes salidas según el contenido de los datos. Se usan condiciones (expresiones de SSIS) para especificar las filas que se van a enrutar. Por ejemplo, se usa para separar los registros que deben limpiarse de los registros listos para ser cargados o para enrutar solamente un subconjunto de registros."
+              name="División condicional"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\CARGA_STAGE_EMPLEADO\División condicional.Inputs[Entrada de división condicional]"
+                  description="Entrada en la transformación División condicional"
+                  name="Entrada de división condicional">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\División condicional.Inputs[Entrada de división condicional].Columns[empleadoid]"
+                      cachedDataType="i4"
+                      cachedName="empleadoid"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[empleadoid]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA_STAGE_EMPLEADO\División condicional.Outputs[EMPLEADOS_NUEVOS]"
+                  description="Salida 1 de la transformación División condicional"
+                  errorOrTruncationOperation="Cálculo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="EMPLEADOS_NUEVOS"
+                  synchronousInputId="Package\CARGA_STAGE_EMPLEADO\División condicional.Inputs[Entrada de división condicional]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la expresión. Esta versión de expresión usa identificadores de linaje en lugar de nombres de columna."
+                      name="Expression">[ISNULL](#{Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[empleadoid]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la versión descriptiva de la expresión. Esta versión de expresión usa nombres de columna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(empleadoid)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la posición de la condición en la lista de condiciones que evalúa la transformación. El orden de evaluación es del menor al mayor valor."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA_STAGE_EMPLEADO\División condicional.Outputs[Salida predeterminada de división condicional]"
+                  description="Salida predeterminada de la transformación División condicional"
+                  exclusionGroup="1"
+                  name="Salida predeterminada de división condicional"
+                  synchronousInputId="Package\CARGA_STAGE_EMPLEADO\División condicional.Inputs[Entrada de división condicional]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA_STAGE_EMPLEADO\División condicional.Outputs[Salida de error de división condicional]"
+                  description="Salida de error de la transformación División condicional"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de división condicional"
+                  synchronousInputId="Package\CARGA_STAGE_EMPLEADO\División condicional.Inputs[Entrada de división condicional]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="EMPLEADO_STAGE"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[empleado]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.stage_northwind]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.stage_northwind]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[empleadoid]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].ExternalColumns[empleadoid]"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[empleadoid]"
+                      name="empleadoid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].ExternalColumns[nombre]"
+                      length="10"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[nombre]"
+                      name="nombre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[apellido]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].ExternalColumns[apellido]"
+                      length="20"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[apellido]"
+                      name="apellido"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[fecha_contratacion]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].ExternalColumns[fecha_contratacion]"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[fecha_contratacion]"
+                      name="fecha_contratacion"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].ExternalColumns[empleadoid]"
+                      dataType="i4"
+                      name="empleadoid" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].ExternalColumns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="nombre" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].ExternalColumns[apellido]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="apellido" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].ExternalColumns[fecha_contratacion]"
+                      dataType="dbDate"
+                      name="fecha_contratacion" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de error de origen de OLE DB].Columns[empleadoid]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de error de origen de OLE DB].Columns[empleadoid]"
+                      name="empleadoid" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de error de origen de OLE DB].Columns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de error de origen de OLE DB].Columns[nombre]"
+                      name="nombre" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de error de origen de OLE DB].Columns[apellido]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de error de origen de OLE DB].Columns[apellido]"
+                      name="apellido" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de error de origen de OLE DB].Columns[fecha_contratacion]"
+                      dataType="dbDate"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de error de origen de OLE DB].Columns[fecha_contratacion]"
+                      name="fecha_contratacion" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="EMPLOYEE_NORTHWIND"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT EmployeeID, FirstName, LastName, HireDate
+FROM NORTHWND.dbo.Employees;</property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.NORTHWND]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.NORTHWND]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[EmployeeID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].ExternalColumns[EmployeeID]"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[EmployeeID]"
+                      name="EmployeeID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].ExternalColumns[FirstName]"
+                      length="10"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].ExternalColumns[LastName]"
+                      length="20"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[HireDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].ExternalColumns[HireDate]"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[HireDate]"
+                      name="HireDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].ExternalColumns[EmployeeID]"
+                      dataType="i4"
+                      name="EmployeeID" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="10"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="20"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].ExternalColumns[HireDate]"
+                      dataType="dbTimeStamp"
+                      name="HireDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de error de origen de OLE DB].Columns[EmployeeID]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de error de origen de OLE DB].Columns[EmployeeID]"
+                      name="EmployeeID" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de error de origen de OLE DB].Columns[FirstName]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de error de origen de OLE DB].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de error de origen de OLE DB].Columns[LastName]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de error de origen de OLE DB].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de error de origen de OLE DB].Columns[HireDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de error de origen de OLE DB].Columns[HireDate]"
+                      name="HireDate" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Combinación de mezcla;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Combina dos flujos de datos ordenados en uno solo mediante la combinación FULL, LEFT o INNER. Se recomienda esta transformación cuando se pueden ordenar los flujos de datos en sus orígenes."
+              name="LEFT JOIN EMPLOYEE_EMPLEADO"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de combinación que se debe realizar."
+                  name="JoinType"
+                  typeConverter="JoinType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de columnas de la clave de ordenación."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores NULL se tratan como valores iguales."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indica la cantidad máxima solicitada de búferes por entrada antes del bloqueo."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada izquierda de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada izquierda de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada izquierda de combinación de mezcla].Columns[EmployeeID]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación].Columns[EmployeeID]" />
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada izquierda de combinación de mezcla].Columns[Copy of FirstName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Copy of FirstName"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of FirstName]" />
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada izquierda de combinación de mezcla].Columns[Copy of LastName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="Copy of LastName"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Outputs[Salida de conversión de datos].Columns[Copy of LastName]" />
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada izquierda de combinación de mezcla].Columns[HireDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="HireDate"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación].Columns[HireDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada derecha de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada derecha de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada derecha de combinación de mezcla].Columns[empleadoid]"
+                      cachedDataType="i4"
+                      cachedName="empleadoid"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Outputs[Salida de ordenación].Columns[empleadoid]" />
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada derecha de combinación de mezcla].Columns[nombre]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="nombre"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Outputs[Salida de ordenación].Columns[nombre]" />
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada derecha de combinación de mezcla].Columns[apellido]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="apellido"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Outputs[Salida de ordenación].Columns[apellido]" />
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada derecha de combinación de mezcla].Columns[fecha_contratacion]"
+                      cachedDataType="dbDate"
+                      cachedName="fecha_contratacion"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Outputs[Salida de ordenación].Columns[fecha_contratacion]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla]"
+                  isSorted="true"
+                  name="Salida de combinación de mezcla">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[EmployeeID]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[EmployeeID]"
+                      name="EmployeeID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada izquierda de combinación de mezcla].Columns[EmployeeID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[Copy of FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[Copy of FirstName]"
+                      name="Copy of FirstName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada izquierda de combinación de mezcla].Columns[Copy of FirstName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[Copy of LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[Copy of LastName]"
+                      name="Copy of LastName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada izquierda de combinación de mezcla].Columns[Copy of LastName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[HireDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[HireDate]"
+                      name="HireDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada izquierda de combinación de mezcla].Columns[HireDate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[empleadoid]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[empleadoid]"
+                      name="empleadoid">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada derecha de combinación de mezcla].Columns[empleadoid]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[nombre]"
+                      name="nombre">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada derecha de combinación de mezcla].Columns[nombre]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[apellido]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[apellido]"
+                      name="apellido">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada derecha de combinación de mezcla].Columns[apellido]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[fecha_contratacion]"
+                      dataType="dbDate"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[fecha_contratacion]"
+                      name="fecha_contratacion">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada derecha de combinación de mezcla].Columns[fecha_contratacion]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="ORDENAR_EMPLEADO"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Inputs[Entrada de ordenación].Columns[empleadoid]"
+                      cachedDataType="i4"
+                      cachedName="empleadoid"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[empleadoid]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Inputs[Entrada de ordenación].Columns[nombre]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="nombre"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[nombre]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Inputs[Entrada de ordenación].Columns[apellido]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="apellido"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[apellido]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Inputs[Entrada de ordenación].Columns[fecha_contratacion]"
+                      cachedDataType="dbDate"
+                      cachedName="fecha_contratacion"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[fecha_contratacion]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Outputs[Salida de ordenación].Columns[empleadoid]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Outputs[Salida de ordenación].Columns[empleadoid]"
+                      name="empleadoid"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[empleadoid]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Outputs[Salida de ordenación].Columns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Outputs[Salida de ordenación].Columns[nombre]"
+                      name="nombre">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[nombre]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Outputs[Salida de ordenación].Columns[apellido]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Outputs[Salida de ordenación].Columns[apellido]"
+                      name="apellido">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[apellido]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Outputs[Salida de ordenación].Columns[fecha_contratacion]"
+                      dataType="dbDate"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Outputs[Salida de ordenación].Columns[fecha_contratacion]"
+                      name="fecha_contratacion">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB].Columns[fecha_contratacion]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="ORDENAR_EMPLOYEE"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Inputs[Entrada de ordenación].Columns[EmployeeID]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeID"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[EmployeeID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Inputs[Entrada de ordenación].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="FirstName"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[FirstName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Inputs[Entrada de ordenación].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="LastName"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[LastName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Inputs[Entrada de ordenación].Columns[HireDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="HireDate"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[HireDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación].Columns[EmployeeID]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación].Columns[EmployeeID]"
+                      name="EmployeeID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[EmployeeID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación].Columns[FirstName]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación].Columns[FirstName]"
+                      name="FirstName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[FirstName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación].Columns[LastName]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación].Columns[LastName]"
+                      name="LastName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[LastName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación].Columns[HireDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación].Columns[HireDate]"
+                      name="HireDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB].Columns[HireDate]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="STAGE_EMPLEADO"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[empleado]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.stage_northwind]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.stage_northwind]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Inputs[Entrada de destino de OLE DB].Columns[Copy of FirstName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Copy of FirstName"
+                      externalMetadataColumnId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Inputs[Entrada de destino de OLE DB].ExternalColumns[nombre]"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[Copy of FirstName]" />
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Inputs[Entrada de destino de OLE DB].Columns[Copy of LastName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="Copy of LastName"
+                      externalMetadataColumnId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Inputs[Entrada de destino de OLE DB].ExternalColumns[apellido]"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[Copy of LastName]" />
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Inputs[Entrada de destino de OLE DB].Columns[EmployeeID]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeID"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Inputs[Entrada de destino de OLE DB].ExternalColumns[empleadoid]"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[EmployeeID]" />
+                    <inputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Inputs[Entrada de destino de OLE DB].Columns[HireDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="HireDate"
+                      externalMetadataColumnId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Inputs[Entrada de destino de OLE DB].ExternalColumns[fecha_contratacion]"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla].Columns[HireDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Inputs[Entrada de destino de OLE DB].ExternalColumns[empleadoid]"
+                      dataType="i4"
+                      name="empleadoid" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Inputs[Entrada de destino de OLE DB].ExternalColumns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="nombre" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Inputs[Entrada de destino de OLE DB].ExternalColumns[apellido]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="apellido" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Inputs[Entrada de destino de OLE DB].ExternalColumns[fecha_contratacion]"
+                      dataType="dbDate"
+                      name="fecha_contratacion" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\CARGA_STAGE_EMPLEADO.Paths[EMPLEADOS_NUEVOS]"
+              endId="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO.Inputs[Entrada de destino de OLE DB]"
+              name="EMPLEADOS_NUEVOS"
+              startId="Package\CARGA_STAGE_EMPLEADO\División condicional.Outputs[EMPLEADOS_NUEVOS]" />
+            <path
+              refId="Package\CARGA_STAGE_EMPLEADO.Paths[Salida de combinación de mezcla]"
+              endId="Package\CARGA_STAGE_EMPLEADO\División condicional.Inputs[Entrada de división condicional]"
+              name="Salida de combinación de mezcla"
+              startId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Outputs[Salida de combinación de mezcla]" />
+            <path
+              refId="Package\CARGA_STAGE_EMPLEADO.Paths[Salida de conversión de datos]"
+              endId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada izquierda de combinación de mezcla]"
+              name="Salida de conversión de datos"
+              startId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Outputs[Salida de conversión de datos]" />
+            <path
+              refId="Package\CARGA_STAGE_EMPLEADO.Paths[Salida de ordenación]"
+              endId="Package\CARGA_STAGE_EMPLEADO\Conversión de datos.Inputs[Entrada de conversión de datos]"
+              name="Salida de ordenación"
+              startId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\CARGA_STAGE_EMPLEADO.Paths[Salida de ordenación1]"
+              endId="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO.Inputs[Entrada derecha de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\CARGA_STAGE_EMPLEADO.Paths[Salida de origen de OLE DB]"
+              endId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND.Outputs[Salida de origen de OLE DB]" />
+            <path
+              refId="Package\CARGA_STAGE_EMPLEADO.Paths[Salida de origen de OLE DB1]"
+              endId="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE.Outputs[Salida de origen de OLE DB]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="220,41.6"
+          Id="Package\CARGA_STAGE_EMPLEADO"
+          TopLeft="201.190465197913,52.7428567760899" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\CARGA_STAGE_EMPLEADO">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="169.6,41.6"
+          Id="Package\CARGA_STAGE_EMPLEADO\División condicional"
+          TopLeft="364.102544208878,407.999997162819" />
+        <NodeLayout
+          Size="253.6,41.6"
+          Id="Package\CARGA_STAGE_EMPLEADO\LEFT JOIN EMPLOYEE_EMPLEADO"
+          TopLeft="317.857125490195,318.190473977819" />
+        <NodeLayout
+          Size="193.6,41.6"
+          Id="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLEADO"
+          TopLeft="422.023786465446,140.523808546625" />
+        <NodeLayout
+          Size="176.8,41.6"
+          Id="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE"
+          TopLeft="432.738071594329,50.7619044089128" />
+        <NodeLayout
+          Size="176.8,41.6"
+          Id="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO"
+          TopLeft="359.615364966867,506.102560964048" />
+        <NodeLayout
+          Size="206.4,41.6"
+          Id="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND"
+          TopLeft="88.6904713446424,47.6666663351986" />
+        <NodeLayout
+          Size="193.6,41.6"
+          Id="Package\CARGA_STAGE_EMPLEADO\ORDENAR_EMPLOYEE"
+          TopLeft="91.666661658221,130.619046710739" />
+        <NodeLayout
+          Size="173.6,41.6"
+          Id="Package\CARGA_STAGE_EMPLEADO\Conversión de datos"
+          TopLeft="105.357137100682,213.57142708628" />
+        <EdgeLayout
+          Id="Package\CARGA_STAGE_EMPLEADO.Paths[Salida de origen de OLE DB1]"
+          TopLeft="519.980929029888,92.3619044089128">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.1619041377117"
+              Start="0,0"
+              End="0,40.6619041377117">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.6619041377117" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CARGA_STAGE_EMPLEADO.Paths[Salida de origen de OLE DB]"
+          TopLeft="190.178566501432,89.2666663351986">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.3523803755404"
+              Start="0,0"
+              End="0,33.8523803755404">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.8523803755404" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CARGA_STAGE_EMPLEADO.Paths[Salida de ordenación1]"
+          TopLeft="518.823786465446,182.123808546625">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-33.233327641918,136.066665431195"
+              Start="0,0"
+              End="-33.233327641918,128.566665431195">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,77.1281497335839" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,77.1281497335839"
+                    Point2="0,81.1281497335839"
+                    Point3="-4,81.1281497335839" />
+                  <mssgle:LineSegment
+                    End="-29.233327641918,81.1281497335839" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-29.233327641918,81.1281497335839"
+                    Point2="-33.233327641918,81.1281497335839"
+                    Point3="-33.233327641918,85.1281497335839" />
+                  <mssgle:LineSegment
+                    End="-33.233327641918,128.566665431195" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CARGA_STAGE_EMPLEADO.Paths[Salida de ordenación]"
+          TopLeft="190.311899379452,172.219046710739">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.3523803755405"
+              Start="0,0"
+              End="0,33.8523803755405">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.8523803755405" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CARGA_STAGE_EMPLEADO.Paths[Salida de conversión de datos]"
+          TopLeft="192.157137100682,255.17142708628">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="211.566655056179,63.0190468915398"
+              Start="0,0"
+              End="211.566655056179,55.5190468915398">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5743658895639" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.5743658895639"
+                    Point2="0,37.5743658895639"
+                    Point3="4,37.5743658895639" />
+                  <mssgle:LineSegment
+                    End="207.566655056179,37.5743658895639" />
+                  <mssgle:CubicBezierSegment
+                    Point1="207.566655056179,37.5743658895639"
+                    Point2="211.566655056179,37.5743658895639"
+                    Point3="211.566655056179,41.5743658895639" />
+                  <mssgle:LineSegment
+                    End="211.566655056179,55.5190468915398" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CARGA_STAGE_EMPLEADO.Paths[Salida de combinación de mezcla]"
+          TopLeft="446.779834849536,359.790473977819">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.2095231849996"
+              Start="0,0"
+              End="0,40.7095231849996">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.7095231849996" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CARGA_STAGE_EMPLEADO.Paths[EMPLEADOS_NUEVOS]"
+          TopLeft="448.458954587872,449.599997162819">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.5025638012294"
+              Start="0,0"
+              End="0,49.0025638012294">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.0025638012294" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-49.39248046875,19.0579225256147,98.7849609375,10.88671875"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA_STAGE_EMPLEADO\EMPLEADO_STAGE">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA_STAGE_EMPLEADO\STAGE_EMPLEADO">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA_STAGE_EMPLEADO\EMPLOYEE_NORTHWIND">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

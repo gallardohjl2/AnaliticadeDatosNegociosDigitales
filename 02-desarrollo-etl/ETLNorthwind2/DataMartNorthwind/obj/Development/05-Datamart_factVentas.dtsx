@@ -1,0 +1,2300 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/30/2025 4:51:48 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="TI-JOSEHERRERA0"
+  DTS:CreatorName="TI-JOSEHERRERA0\galla"
+  DTS:DTSID="{5397615F-3AB8-43AB-BAB7-12C527C65EC0}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="2058"
+  DTS:ObjectName="05-Datamart_factVentas"
+  DTS:PackageType="5"
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{93298BD2-DA18-4A31-8213-1822598A9492}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.datamart_northwind]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5B800212-EC7A-418E-9CAE-30762E570A6B}"
+      DTS:ObjectName="LocalHost.datamart_northwind">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=datamart_northwind;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-05-Datamart_factVentas-{5B800212-EC7A-418E-9CAE-30762E570A6B}LocalHost.datamart_northwind;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.stage_northwind]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0841ADCE-BB2D-467A-A496-BC6B328AA412}"
+      DTS:ObjectName="LocalHost.stage_northwind">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=stage_northwind;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-05-Datamart_factVentas-{0841ADCE-BB2D-467A-A496-BC6B328AA412}LocalHost.stage_northwind;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\CARGA FACTVENTAS"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{4F11A6F3-0CE9-4B09-ABDA-5AF0BEAFD6A2}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CARGA FACTVENTAS"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\CARGA FACTVENTAS\Combinación de mezcla"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Combinación de mezcla;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Combina dos flujos de datos ordenados en uno solo mediante la combinación FULL, LEFT o INNER. Se recomienda esta transformación cuando se pueden ordenar los flujos de datos en sus orígenes."
+              name="Combinación de mezcla"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de combinación que se debe realizar."
+                  name="JoinType"
+                  typeConverter="JoinType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de columnas de la clave de ordenación."
+                  name="NumKeyColumns">4</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores NULL se tratan como valores iguales."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indica la cantidad máxima solicitada de búferes por entrada antes del bloqueo."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada izquierda de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[cliente_Skey]"
+                      cachedDataType="i4"
+                      cachedName="cliente_Skey"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[cliente_Skey]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[empleado_SKey]"
+                      cachedDataType="i4"
+                      cachedName="empleado_SKey"
+                      cachedSortKeyPosition="2"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[empleado_SKey]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[producto_SKey]"
+                      cachedDataType="i4"
+                      cachedName="producto_SKey"
+                      cachedSortKeyPosition="3"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[producto_SKey]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[tiempo_SKey]"
+                      cachedDataType="i4"
+                      cachedName="tiempo_SKey"
+                      cachedSortKeyPosition="4"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[tiempo_SKey]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[ventasmonto]"
+                      cachedDataType="numeric"
+                      cachedName="ventasmonto"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[ventasmonto]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[ventasunidades]"
+                      cachedDataType="i4"
+                      cachedName="ventasunidades"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[ventasunidades]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[ventaspreciounitario]"
+                      cachedDataType="numeric"
+                      cachedName="ventaspreciounitario"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[ventaspreciounitario]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[ventasdescuento]"
+                      cachedDataType="numeric"
+                      cachedName="ventasdescuento"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[ventasdescuento]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[norden]"
+                      cachedDataType="i4"
+                      cachedName="norden"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[norden]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada derecha de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[cliente_SKey]"
+                      cachedDataType="i4"
+                      cachedName="cliente_SKey"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[cliente_SKey]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[empleado_SKey]"
+                      cachedDataType="i4"
+                      cachedName="empleado_SKey"
+                      cachedSortKeyPosition="2"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[empleado_SKey]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[producto_SKey]"
+                      cachedDataType="i4"
+                      cachedName="producto_SKey"
+                      cachedSortKeyPosition="3"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[producto_SKey]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[tiempo_SKey]"
+                      cachedDataType="i4"
+                      cachedName="tiempo_SKey"
+                      cachedSortKeyPosition="4"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[tiempo_SKey]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[ventas_Norden]"
+                      cachedDataType="i4"
+                      cachedName="ventas_Norden"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[ventas_Norden]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[ventas_monto]"
+                      cachedDataType="numeric"
+                      cachedName="ventas_monto"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[ventas_monto]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[ventas_unidades]"
+                      cachedDataType="i4"
+                      cachedName="ventas_unidades"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[ventas_unidades]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[ventas_punitario]"
+                      cachedDataType="numeric"
+                      cachedName="ventas_punitario"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[ventas_punitario]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[ventas_descuento]"
+                      cachedDataType="numeric"
+                      cachedName="ventas_descuento"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[ventas_descuento]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla]"
+                  isSorted="true"
+                  name="Salida de combinación de mezcla">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[tiempo_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[tiempo_SKey]"
+                      name="tiempo_SKey"
+                      sortKeyPosition="4">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[tiempo_SKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[producto_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[producto_SKey]"
+                      name="producto_SKey"
+                      sortKeyPosition="3">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[producto_SKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[empleado_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[empleado_SKey]"
+                      name="empleado_SKey"
+                      sortKeyPosition="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[empleado_SKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[cliente_Skey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[cliente_Skey]"
+                      name="cliente_Skey"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[cliente_Skey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventasmonto]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventasmonto]"
+                      name="ventasmonto"
+                      precision="15"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[ventasmonto]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventasunidades]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventasunidades]"
+                      name="ventasunidades">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[ventasunidades]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventaspreciounitario]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventaspreciounitario]"
+                      name="ventaspreciounitario"
+                      precision="15"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[ventaspreciounitario]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventasdescuento]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventasdescuento]"
+                      name="ventasdescuento"
+                      precision="15"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[ventasdescuento]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[norden]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[norden]"
+                      name="norden">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[norden]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[cliente_SKey_FACTVENTAS]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[cliente_SKey_FACTVENTAS]"
+                      name="cliente_SKey_FACTVENTAS">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[cliente_SKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[empleado_SKey_FACTVENTAS]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[empleado_SKey_FACTVENTAS]"
+                      name="empleado_SKey_FACTVENTAS">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[empleado_SKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[producto_SKey_FACTVENTAS]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[producto_SKey_FACTVENTAS]"
+                      name="producto_SKey_FACTVENTAS">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[producto_SKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[tiempo_SKey_FACTVENTAS]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[tiempo_SKey_FACTVENTAS]"
+                      name="tiempo_SKey_FACTVENTAS">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[tiempo_SKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventas_Norden_FACTVENTAS]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventas_Norden_FACTVENTAS]"
+                      name="ventas_Norden_FACTVENTAS">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[ventas_Norden]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventas_monto_FACTVENTAS]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventas_monto_FACTVENTAS]"
+                      name="ventas_monto_FACTVENTAS"
+                      precision="15"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[ventas_monto]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventas_unidades_FACTVENTAS]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventas_unidades_FACTVENTAS]"
+                      name="ventas_unidades_FACTVENTAS">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[ventas_unidades]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventas_punitario_FACTVENTAS]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventas_punitario_FACTVENTAS]"
+                      name="ventas_punitario_FACTVENTAS"
+                      precision="15"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[ventas_punitario]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventas_descuento_FACTVENTAS]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventas_descuento_FACTVENTAS]"
+                      name="ventas_descuento_FACTVENTAS"
+                      precision="15"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[ventas_descuento]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="DATAMART_FACTVENTAS"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[fact_ventas]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.datamart_northwind]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.datamart_northwind]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[cliente_SKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[cliente_SKey]"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[cliente_SKey]"
+                      name="cliente_SKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[empleado_SKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[empleado_SKey]"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[empleado_SKey]"
+                      name="empleado_SKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[producto_SKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[producto_SKey]"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[producto_SKey]"
+                      name="producto_SKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[tiempo_SKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[tiempo_SKey]"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[tiempo_SKey]"
+                      name="tiempo_SKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_Norden]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventas_Norden]"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_Norden]"
+                      name="ventas_Norden"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_monto]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventas_monto]"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_monto]"
+                      name="ventas_monto"
+                      precision="15"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_unidades]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventas_unidades]"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_unidades]"
+                      name="ventas_unidades"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_punitario]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventas_punitario]"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_punitario]"
+                      name="ventas_punitario"
+                      precision="15"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_descuento]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventas_descuento]"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_descuento]"
+                      name="ventas_descuento"
+                      precision="15"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[cliente_SKey]"
+                      dataType="i4"
+                      name="cliente_SKey" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[empleado_SKey]"
+                      dataType="i4"
+                      name="empleado_SKey" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[producto_SKey]"
+                      dataType="i4"
+                      name="producto_SKey" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[tiempo_SKey]"
+                      dataType="i4"
+                      name="tiempo_SKey" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventas_Norden]"
+                      dataType="i4"
+                      name="ventas_Norden" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventas_monto]"
+                      dataType="numeric"
+                      name="ventas_monto"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventas_unidades]"
+                      dataType="i4"
+                      name="ventas_unidades" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventas_punitario]"
+                      dataType="numeric"
+                      name="ventas_punitario"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventas_descuento]"
+                      dataType="numeric"
+                      name="ventas_descuento"
+                      precision="15"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[cliente_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[cliente_SKey]"
+                      name="cliente_SKey" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[empleado_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[empleado_SKey]"
+                      name="empleado_SKey" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[producto_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[producto_SKey]"
+                      name="producto_SKey" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[tiempo_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[tiempo_SKey]"
+                      name="tiempo_SKey" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventas_Norden]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventas_Norden]"
+                      name="ventas_Norden" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventas_monto]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventas_monto]"
+                      name="ventas_monto"
+                      precision="15"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventas_unidades]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventas_unidades]"
+                      name="ventas_unidades" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventas_punitario]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventas_punitario]"
+                      name="ventas_punitario"
+                      precision="15"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventas_descuento]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventas_descuento]"
+                      name="ventas_descuento"
+                      precision="15"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA FACTVENTAS\Destino de OLE DB"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="Destino de OLE DB"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[fact_ventas]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.datamart_northwind]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.datamart_northwind]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[tiempo_SKey]"
+                      cachedDataType="i4"
+                      cachedName="tiempo_SKey"
+                      cachedSortKeyPosition="4"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[tiempo_SKey]"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[tiempo_SKey]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[producto_SKey]"
+                      cachedDataType="i4"
+                      cachedName="producto_SKey"
+                      cachedSortKeyPosition="3"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[producto_SKey]"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[producto_SKey]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[empleado_SKey]"
+                      cachedDataType="i4"
+                      cachedName="empleado_SKey"
+                      cachedSortKeyPosition="2"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[empleado_SKey]"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[empleado_SKey]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[cliente_Skey]"
+                      cachedDataType="i4"
+                      cachedName="cliente_Skey"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[cliente_SKey]"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[cliente_Skey]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[norden]"
+                      cachedDataType="i4"
+                      cachedName="norden"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ventas_Norden]"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[norden]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[ventasmonto]"
+                      cachedDataType="numeric"
+                      cachedName="ventasmonto"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ventas_monto]"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventasmonto]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[ventasunidades]"
+                      cachedDataType="i4"
+                      cachedName="ventasunidades"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ventas_unidades]"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventasunidades]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[ventaspreciounitario]"
+                      cachedDataType="numeric"
+                      cachedName="ventaspreciounitario"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ventas_punitario]"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventaspreciounitario]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[ventasdescuento]"
+                      cachedDataType="numeric"
+                      cachedName="ventasdescuento"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ventas_descuento]"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[ventasdescuento]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[cliente_SKey]"
+                      dataType="i4"
+                      name="cliente_SKey" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[empleado_SKey]"
+                      dataType="i4"
+                      name="empleado_SKey" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[producto_SKey]"
+                      dataType="i4"
+                      name="producto_SKey" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[tiempo_SKey]"
+                      dataType="i4"
+                      name="tiempo_SKey" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ventas_Norden]"
+                      dataType="i4"
+                      name="ventas_Norden" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ventas_monto]"
+                      dataType="numeric"
+                      name="ventas_monto"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ventas_unidades]"
+                      dataType="i4"
+                      name="ventas_unidades" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ventas_punitario]"
+                      dataType="numeric"
+                      name="ventas_punitario"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ventas_descuento]"
+                      dataType="numeric"
+                      name="ventas_descuento"
+                      precision="15"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA FACTVENTAS\División condicional"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="División condicional;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Enruta filas de datos a diferentes salidas según el contenido de los datos. Se usan condiciones (expresiones de SSIS) para especificar las filas que se van a enrutar. Por ejemplo, se usa para separar los registros que deben limpiarse de los registros listos para ser cargados o para enrutar solamente un subconjunto de registros."
+              name="División condicional"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\CARGA FACTVENTAS\División condicional.Inputs[Entrada de división condicional]"
+                  description="Entrada en la transformación División condicional"
+                  name="Entrada de división condicional">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\División condicional.Inputs[Entrada de división condicional].Columns[cliente_SKey_FACTVENTAS]"
+                      cachedDataType="i4"
+                      cachedName="cliente_SKey_FACTVENTAS"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[cliente_SKey_FACTVENTAS]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\División condicional.Inputs[Entrada de división condicional].Columns[empleado_SKey_FACTVENTAS]"
+                      cachedDataType="i4"
+                      cachedName="empleado_SKey_FACTVENTAS"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[empleado_SKey_FACTVENTAS]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\División condicional.Inputs[Entrada de división condicional].Columns[producto_SKey_FACTVENTAS]"
+                      cachedDataType="i4"
+                      cachedName="producto_SKey_FACTVENTAS"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[producto_SKey_FACTVENTAS]" />
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\División condicional.Inputs[Entrada de división condicional].Columns[tiempo_SKey_FACTVENTAS]"
+                      cachedDataType="i4"
+                      cachedName="tiempo_SKey_FACTVENTAS"
+                      lineageId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[tiempo_SKey_FACTVENTAS]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA FACTVENTAS\División condicional.Outputs[VENTAS_NUEVAS]"
+                  description="Salida 1 de la transformación División condicional"
+                  errorOrTruncationOperation="Cálculo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="VENTAS_NUEVAS"
+                  synchronousInputId="Package\CARGA FACTVENTAS\División condicional.Inputs[Entrada de división condicional]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la expresión. Esta versión de expresión usa identificadores de linaje en lugar de nombres de columna."
+                      name="Expression">[ISNULL](#{Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[cliente_SKey_FACTVENTAS]}) || [ISNULL](#{Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[empleado_SKey_FACTVENTAS]}) || [ISNULL](#{Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[producto_SKey_FACTVENTAS]}) || [ISNULL](#{Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[tiempo_SKey_FACTVENTAS]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la versión descriptiva de la expresión. Esta versión de expresión usa nombres de columna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(cliente_SKey_FACTVENTAS) || ISNULL(empleado_SKey_FACTVENTAS) || ISNULL(producto_SKey_FACTVENTAS) || ISNULL(tiempo_SKey_FACTVENTAS)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la posición de la condición en la lista de condiciones que evalúa la transformación. El orden de evaluación es del menor al mayor valor."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA FACTVENTAS\División condicional.Outputs[Salida predeterminada de división condicional]"
+                  description="Salida predeterminada de la transformación División condicional"
+                  exclusionGroup="1"
+                  name="Salida predeterminada de división condicional"
+                  synchronousInputId="Package\CARGA FACTVENTAS\División condicional.Inputs[Entrada de división condicional]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CARGA FACTVENTAS\División condicional.Outputs[Salida de error de división condicional]"
+                  description="Salida de error de la transformación División condicional"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de división condicional"
+                  synchronousInputId="Package\CARGA FACTVENTAS\División condicional.Inputs[Entrada de división condicional]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="ORDENAR_FACTVENTAS"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Inputs[Entrada de ordenación].Columns[cliente_SKey]"
+                      cachedDataType="i4"
+                      cachedName="cliente_SKey"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[cliente_SKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Inputs[Entrada de ordenación].Columns[empleado_SKey]"
+                      cachedDataType="i4"
+                      cachedName="empleado_SKey"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[empleado_SKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Inputs[Entrada de ordenación].Columns[producto_SKey]"
+                      cachedDataType="i4"
+                      cachedName="producto_SKey"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[producto_SKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">3</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Inputs[Entrada de ordenación].Columns[tiempo_SKey]"
+                      cachedDataType="i4"
+                      cachedName="tiempo_SKey"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[tiempo_SKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">4</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Inputs[Entrada de ordenación].Columns[ventas_Norden]"
+                      cachedDataType="i4"
+                      cachedName="ventas_Norden"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_Norden]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Inputs[Entrada de ordenación].Columns[ventas_monto]"
+                      cachedDataType="numeric"
+                      cachedName="ventas_monto"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_monto]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Inputs[Entrada de ordenación].Columns[ventas_unidades]"
+                      cachedDataType="i4"
+                      cachedName="ventas_unidades"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_unidades]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Inputs[Entrada de ordenación].Columns[ventas_punitario]"
+                      cachedDataType="numeric"
+                      cachedName="ventas_punitario"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_punitario]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Inputs[Entrada de ordenación].Columns[ventas_descuento]"
+                      cachedDataType="numeric"
+                      cachedName="ventas_descuento"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      lineageId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_descuento]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[cliente_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[cliente_SKey]"
+                      name="cliente_SKey"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[cliente_SKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[empleado_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[empleado_SKey]"
+                      name="empleado_SKey"
+                      sortKeyPosition="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[empleado_SKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[producto_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[producto_SKey]"
+                      name="producto_SKey"
+                      sortKeyPosition="3">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[producto_SKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[tiempo_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[tiempo_SKey]"
+                      name="tiempo_SKey"
+                      sortKeyPosition="4">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[tiempo_SKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[ventas_Norden]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[ventas_Norden]"
+                      name="ventas_Norden">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_Norden]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[ventas_monto]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[ventas_monto]"
+                      name="ventas_monto"
+                      precision="15"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_monto]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[ventas_unidades]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[ventas_unidades]"
+                      name="ventas_unidades">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_unidades]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[ventas_punitario]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[ventas_punitario]"
+                      name="ventas_punitario"
+                      precision="15"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_punitario]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[ventas_descuento]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación].Columns[ventas_descuento]"
+                      name="ventas_descuento"
+                      precision="15"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB].Columns[ventas_descuento]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="ORDENAR_STAGEVENTAS"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Inputs[Entrada de ordenación].Columns[cliente_Skey]"
+                      cachedDataType="i4"
+                      cachedName="cliente_Skey"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[cliente_Skey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Inputs[Entrada de ordenación].Columns[empleado_SKey]"
+                      cachedDataType="i4"
+                      cachedName="empleado_SKey"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[empleado_SKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Inputs[Entrada de ordenación].Columns[producto_SKey]"
+                      cachedDataType="i4"
+                      cachedName="producto_SKey"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[producto_SKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">3</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Inputs[Entrada de ordenación].Columns[tiempo_SKey]"
+                      cachedDataType="i4"
+                      cachedName="tiempo_SKey"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[tiempo_SKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">4</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Inputs[Entrada de ordenación].Columns[ventasmonto]"
+                      cachedDataType="numeric"
+                      cachedName="ventasmonto"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventasmonto]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Inputs[Entrada de ordenación].Columns[ventasunidades]"
+                      cachedDataType="i4"
+                      cachedName="ventasunidades"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventasunidades]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Inputs[Entrada de ordenación].Columns[ventaspreciounitario]"
+                      cachedDataType="numeric"
+                      cachedName="ventaspreciounitario"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventaspreciounitario]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Inputs[Entrada de ordenación].Columns[ventasdescuento]"
+                      cachedDataType="numeric"
+                      cachedName="ventasdescuento"
+                      cachedPrecision="15"
+                      cachedScale="2"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventasdescuento]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Inputs[Entrada de ordenación].Columns[norden]"
+                      cachedDataType="i4"
+                      cachedName="norden"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[norden]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[cliente_Skey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[cliente_Skey]"
+                      name="cliente_Skey"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[cliente_Skey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[empleado_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[empleado_SKey]"
+                      name="empleado_SKey"
+                      sortKeyPosition="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[empleado_SKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[producto_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[producto_SKey]"
+                      name="producto_SKey"
+                      sortKeyPosition="3">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[producto_SKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[tiempo_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[tiempo_SKey]"
+                      name="tiempo_SKey"
+                      sortKeyPosition="4">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[tiempo_SKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[ventasmonto]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[ventasmonto]"
+                      name="ventasmonto"
+                      precision="15"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventasmonto]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[ventasunidades]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[ventasunidades]"
+                      name="ventasunidades">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventasunidades]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[ventaspreciounitario]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[ventaspreciounitario]"
+                      name="ventaspreciounitario"
+                      precision="15"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventaspreciounitario]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[ventasdescuento]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[ventasdescuento]"
+                      name="ventasdescuento"
+                      precision="15"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventasdescuento]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[norden]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación].Columns[norden]"
+                      name="norden">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[norden]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CARGA FACTVENTAS\STAGE_VENTAS"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="STAGE_VENTAS"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT dc.cliente_Skey, de.empleado_SKey, 
+dp.producto_SKey, dt.tiempo_SKey,
+(1) AS norden, sv.ventasmonto, sv.ventasunidades, 
+sv.ventaspreciounitario, ventasdescuento
+FROM stage_northwind.dbo.ventas as sv
+INNER JOIN 
+datamart_northwind.dbo.dim_cliente as dc
+ON sv.clienteid = dc.cliente_codigoBKey
+INNER JOIN datamart_northwind.dbo.dim_empleado as de
+ON sv.empleadocodigo = de.empleado_codigoBKey
+INNER JOIN datamart_northwind.dbo.dim_producto as dp
+ON sv.productocodigo = dp.producto_CodigoBKey
+INNER JOIN datamart_northwind.dbo.dim_tiempo as dt
+ON sv.ventasorden = dt.tiempo_fechaActual;</property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.stage_northwind]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.stage_northwind]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[cliente_Skey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[cliente_Skey]"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[cliente_Skey]"
+                      name="cliente_Skey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[empleado_SKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[empleado_SKey]"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[empleado_SKey]"
+                      name="empleado_SKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[producto_SKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[producto_SKey]"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[producto_SKey]"
+                      name="producto_SKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[tiempo_SKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[tiempo_SKey]"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[tiempo_SKey]"
+                      name="tiempo_SKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventasmonto]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventasmonto]"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventasmonto]"
+                      name="ventasmonto"
+                      precision="15"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventasunidades]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventasunidades]"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventasunidades]"
+                      name="ventasunidades"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventaspreciounitario]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventaspreciounitario]"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventaspreciounitario]"
+                      name="ventaspreciounitario"
+                      precision="15"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventasdescuento]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventasdescuento]"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[ventasdescuento]"
+                      name="ventasdescuento"
+                      precision="15"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[norden]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[norden]"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].Columns[norden]"
+                      name="norden"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[cliente_Skey]"
+                      dataType="i4"
+                      name="cliente_Skey" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[empleado_SKey]"
+                      dataType="i4"
+                      name="empleado_SKey" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[producto_SKey]"
+                      dataType="i4"
+                      name="producto_SKey" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[tiempo_SKey]"
+                      dataType="i4"
+                      name="tiempo_SKey" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventasmonto]"
+                      dataType="numeric"
+                      name="ventasmonto"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventasunidades]"
+                      dataType="i4"
+                      name="ventasunidades" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventaspreciounitario]"
+                      dataType="numeric"
+                      name="ventaspreciounitario"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[ventasdescuento]"
+                      dataType="numeric"
+                      name="ventasdescuento"
+                      precision="15"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB].ExternalColumns[norden]"
+                      dataType="i4"
+                      name="norden" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[cliente_Skey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[cliente_Skey]"
+                      name="cliente_Skey" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[empleado_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[empleado_SKey]"
+                      name="empleado_SKey" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[producto_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[producto_SKey]"
+                      name="producto_SKey" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[tiempo_SKey]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[tiempo_SKey]"
+                      name="tiempo_SKey" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[norden]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[norden]"
+                      name="norden" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventasmonto]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventasmonto]"
+                      name="ventasmonto"
+                      precision="15"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventasunidades]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventasunidades]"
+                      name="ventasunidades" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventaspreciounitario]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventaspreciounitario]"
+                      name="ventaspreciounitario"
+                      precision="15"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventasdescuento]"
+                      dataType="numeric"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ventasdescuento]"
+                      name="ventasdescuento"
+                      precision="15"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\CARGA FACTVENTAS.Paths[Salida de combinación de mezcla]"
+              endId="Package\CARGA FACTVENTAS\División condicional.Inputs[Entrada de división condicional]"
+              name="Salida de combinación de mezcla"
+              startId="Package\CARGA FACTVENTAS\Combinación de mezcla.Outputs[Salida de combinación de mezcla]" />
+            <path
+              refId="Package\CARGA FACTVENTAS.Paths[Salida de ordenación]"
+              endId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\CARGA FACTVENTAS.Paths[Salida de ordenación1]"
+              endId="Package\CARGA FACTVENTAS\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\CARGA FACTVENTAS.Paths[Salida de origen de OLE DB]"
+              endId="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS.Outputs[Salida de origen de OLE DB]" />
+            <path
+              refId="Package\CARGA FACTVENTAS.Paths[Salida de origen de OLE DB1]"
+              endId="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\CARGA FACTVENTAS\STAGE_VENTAS.Outputs[Salida de origen de OLE DB]" />
+            <path
+              refId="Package\CARGA FACTVENTAS.Paths[VENTAS_NUEVAS]"
+              endId="Package\CARGA FACTVENTAS\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+              name="VENTAS_NUEVAS"
+              startId="Package\CARGA FACTVENTAS\División condicional.Outputs[VENTAS_NUEVAS]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="187.2,41.6"
+          Id="Package\CARGA FACTVENTAS"
+          TopLeft="231.999987324079,33.626666432831" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\CARGA FACTVENTAS">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="160.8,41.6"
+          Id="Package\CARGA FACTVENTAS\STAGE_VENTAS"
+          TopLeft="277.142842000439,61.7809519513353" />
+        <NodeLayout
+          Size="210.4,41.6"
+          Id="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS"
+          TopLeft="548.952351259454,69.8809519332553" />
+        <NodeLayout
+          Size="204.8,41.6"
+          Id="Package\CARGA FACTVENTAS\ORDENAR_FACTVENTAS"
+          TopLeft="568.452349893514,157.857141759424" />
+        <EdgeLayout
+          Id="Package\CARGA FACTVENTAS.Paths[Salida de origen de OLE DB]"
+          TopLeft="654.152351259454,111.480951933255">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="16.69999863406,46.3761898261687"
+              Start="0,0"
+              End="16.69999863406,38.8761898261687">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.1880949130844" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.1880949130844"
+                    Point2="0,23.1880949130844"
+                    Point3="4,23.1880949130844" />
+                  <mssgle:LineSegment
+                    End="12.69999863406,23.1880949130844" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.69999863406,23.1880949130844"
+                    Point2="16.69999863406,23.1880949130844"
+                    Point3="16.69999863406,27.1880949130844" />
+                  <mssgle:LineSegment
+                    End="16.69999863406,38.8761898261687" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="169.6,41.6"
+          Id="Package\CARGA FACTVENTAS\División condicional"
+          TopLeft="485.714259176028,335.523807190619" />
+        <NodeLayout
+          Size="212.8,41.6"
+          Id="Package\CARGA FACTVENTAS\ORDENAR_STAGEVENTAS"
+          TopLeft="283.928555915399,151.666665611996" />
+        <EdgeLayout
+          Id="Package\CARGA FACTVENTAS.Paths[Salida de origen de OLE DB1]"
+          TopLeft="357.542842000439,103.380951951335">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="32.7857139149596,48.2857136606603"
+              Start="0,0"
+              End="32.7857139149596,40.7857136606603">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.1428568303302" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.1428568303302"
+                    Point2="0,24.1428568303302"
+                    Point3="4,24.1428568303302" />
+                  <mssgle:LineSegment
+                    End="28.7857139149596,24.1428568303302" />
+                  <mssgle:CubicBezierSegment
+                    Point1="28.7857139149596,24.1428568303302"
+                    Point2="32.7857139149596,24.1428568303302"
+                    Point3="32.7857139149596,28.1428568303302" />
+                  <mssgle:LineSegment
+                    End="32.7857139149596,40.7857136606603" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="189.6,41.6"
+          Id="Package\CARGA FACTVENTAS\Combinación de mezcla"
+          TopLeft="460.714260541968,245.380951171309" />
+        <EdgeLayout
+          Id="Package\CARGA FACTVENTAS.Paths[Salida de ordenación]"
+          TopLeft="390.328555915399,193.266665611996">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="165.185704626569,52.1142855593136"
+              Start="0,0"
+              End="165.185704626569,44.6142855593136">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.0571427796568" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.0571427796568"
+                    Point2="0,26.0571427796568"
+                    Point3="4,26.0571427796568" />
+                  <mssgle:LineSegment
+                    End="161.185704626569,26.0571427796568" />
+                  <mssgle:CubicBezierSegment
+                    Point1="161.185704626569,26.0571427796568"
+                    Point2="165.185704626569,26.0571427796568"
+                    Point3="165.185704626569,30.0571427796568" />
+                  <mssgle:LineSegment
+                    End="165.185704626569,44.6142855593136" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CARGA FACTVENTAS.Paths[Salida de ordenación1]"
+          TopLeft="670.852349893514,199.457141759424">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-85.0714226848787,45.9238094118853"
+              Start="0,0"
+              End="-85.0714226848787,38.4238094118853">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.3237058509208" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.3237058509208"
+                    Point2="0,27.3237058509208"
+                    Point3="-4,27.3237058509208" />
+                  <mssgle:LineSegment
+                    End="-81.0714226848787,27.3237058509208" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-81.0714226848787,27.3237058509208"
+                    Point2="-85.0714226848787,27.3237058509208"
+                    Point3="-85.0714226848787,31.3237058509208" />
+                  <mssgle:LineSegment
+                    End="-85.0714226848787,38.4238094118853" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CARGA FACTVENTAS.Paths[Salida de combinación de mezcla]"
+          TopLeft="555.514260541968,286.980951171309">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="14.9999986340599,48.5428560193096"
+              Start="0,0"
+              End="14.9999986340599,41.0428560193096">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2714280096548" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2714280096548"
+                    Point2="0,24.2714280096548"
+                    Point3="4,24.2714280096548" />
+                  <mssgle:LineSegment
+                    End="10.9999986340599,24.2714280096548" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10.9999986340599,24.2714280096548"
+                    Point2="14.9999986340599,24.2714280096548"
+                    Point3="14.9999986340599,28.2714280096548" />
+                  <mssgle:LineSegment
+                    End="14.9999986340599,41.0428560193096" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\CARGA FACTVENTAS\Destino de OLE DB"
+          TopLeft="477.380926298008,420.095235607075" />
+        <EdgeLayout
+          Id="Package\CARGA FACTVENTAS.Paths[VENTAS_NUEVAS]"
+          TopLeft="570.514259176028,377.123807190619">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-8.73333287801995,42.9714284164565"
+              Start="0,0"
+              End="-8.73333287801995,35.4714284164565">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.4857142082282" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.4857142082282"
+                    Point2="0,21.4857142082282"
+                    Point3="-4,21.4857142082282" />
+                  <mssgle:LineSegment
+                    End="-4.73333287801995,21.4857142082282" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4.73333287801995,21.4857142082282"
+                    Point2="-8.73333287801995,21.4857142082282"
+                    Point3="-8.73333287801995,25.4857142082282" />
+                  <mssgle:LineSegment
+                    End="-8.73333287801995,35.4714284164565" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-44.01233050151,26.4857142082282,79.291328125,10.8671875"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA FACTVENTAS\STAGE_VENTAS">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA FACTVENTAS\DATAMART_FACTVENTAS">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CARGA FACTVENTAS\Destino de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

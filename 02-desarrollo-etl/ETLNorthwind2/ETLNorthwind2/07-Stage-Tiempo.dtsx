@@ -1,0 +1,1982 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/27/2025 2:45:00 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="TI-JOSEHERRERA0"
+  DTS:CreatorName="TI-JOSEHERRERA0\galla"
+  DTS:DTSID="{33F6BAC6-CA74-4BDB-A2FB-55F287DABF42}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="2058"
+  DTS:ObjectName="07-Stage-Tiempo"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{71704B76-DE0E-41CB-A9D7-A40C71319F08}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.NORTHWND]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F31295DB-1689-4449-9592-0F6F1F0AD591}"
+      DTS:ObjectName="LocalHost.NORTHWND">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=NORTHWND;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-07-Stage-Tiempo-{F31295DB-1689-4449-9592-0F6F1F0AD591}LocalHost.NORTHWND;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.stage_northwind]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{77E86B91-A6EC-41F4-8155-F31072236F91}"
+      DTS:ObjectName="LocalHost.stage_northwind">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=stage_northwind;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-07-Stage-Tiempo-{77E86B91-A6EC-41F4-8155-F31072236F91}LocalHost.stage_northwind;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Carga Stage Tiempo"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{46C8FAE4-6894-414C-9BD4-A8F27B5F8508}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Carga Stage Tiempo"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Carga Stage Tiempo\Destino de OLE DB"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="Destino de OLE DB"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[Stage_Tiempo]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Carga Stage Tiempo\Destino de OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.stage_northwind]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.stage_northwind]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[OrderDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="OrderDate"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_FechaActual]"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[OrderDate]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Anio]"
+                      cachedDataType="i4"
+                      cachedName="Anio"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_Anio]"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Anio]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Trimestre]"
+                      cachedDataType="i4"
+                      cachedName="Trimestre"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_Trimestre]"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Trimestre]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Mes]"
+                      cachedDataType="i4"
+                      cachedName="Mes"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_Mes]"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Mes]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Semana]"
+                      cachedDataType="i4"
+                      cachedName="Semana"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_Semana]"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Semana]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[DiaDeAnio]"
+                      cachedDataType="i4"
+                      cachedName="DiaDeAnio"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_DiaDeAnio]"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[DiaDeAnio]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[DiaDeMes]"
+                      cachedDataType="i4"
+                      cachedName="DiaDeMes"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_DiaDeMes]"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[DiaDeMes]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[DiaDeSemana]"
+                      cachedDataType="i4"
+                      cachedName="DiaDeSemana"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_DiaDeSemana]"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[DiaDeSemana]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_Skey]"
+                      dataType="i4"
+                      name="Tiempo_Skey" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_FechaActual]"
+                      dataType="dbTimeStamp"
+                      name="Tiempo_FechaActual" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_Anio]"
+                      dataType="i4"
+                      name="Tiempo_Anio" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_Trimestre]"
+                      dataType="i4"
+                      name="Tiempo_Trimestre" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_Mes]"
+                      dataType="i4"
+                      name="Tiempo_Mes" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_Semana]"
+                      dataType="i4"
+                      name="Tiempo_Semana" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_DiaDeAnio]"
+                      dataType="i4"
+                      name="Tiempo_DiaDeAnio" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_DiaDeMes]"
+                      dataType="i4"
+                      name="Tiempo_DiaDeMes" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tiempo_DiaDeSemana]"
+                      dataType="i4"
+                      name="Tiempo_DiaDeSemana" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Carga Stage Tiempo\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="División condicional;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Enruta filas de datos a diferentes salidas según el contenido de los datos. Se usan condiciones (expresiones de SSIS) para especificar las filas que se van a enrutar. Por ejemplo, se usa para separar los registros que deben limpiarse de los registros listos para ser cargados o para enrutar solamente un subconjunto de registros."
+              name="FILTRAR FECHAS NUEVAS"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS.Inputs[Entrada de división condicional]"
+                  description="Entrada en la transformación División condicional"
+                  name="Entrada de división condicional">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS.Inputs[Entrada de división condicional].Columns[Tiempo_FechaActual]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Tiempo_FechaActual"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_FechaActual]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS.Outputs[FECHAS_NUEVAS]"
+                  description="Salida 1 de la transformación División condicional"
+                  errorOrTruncationOperation="Cálculo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="FECHAS_NUEVAS"
+                  synchronousInputId="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS.Inputs[Entrada de división condicional]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la expresión. Esta versión de expresión usa identificadores de linaje en lugar de nombres de columna."
+                      name="Expression">[ISNULL](#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_FechaActual]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la versión descriptiva de la expresión. Esta versión de expresión usa nombres de columna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(Tiempo_FechaActual)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la posición de la condición en la lista de condiciones que evalúa la transformación. El orden de evaluación es del menor al mayor valor."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS.Outputs[Salida predeterminada de división condicional]"
+                  description="Salida predeterminada de la transformación División condicional"
+                  exclusionGroup="1"
+                  name="Salida predeterminada de división condicional"
+                  synchronousInputId="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS.Inputs[Entrada de división condicional]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS.Outputs[Salida de error de división condicional]"
+                  description="Salida de error de la transformación División condicional"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de división condicional"
+                  synchronousInputId="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS.Inputs[Entrada de división condicional]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Combinación de mezcla;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Combina dos flujos de datos ordenados en uno solo mediante la combinación FULL, LEFT o INNER. Se recomienda esta transformación cuando se pueden ordenar los flujos de datos en sus orígenes."
+              name="LEFT JOIN ORDERS_STAGETIEMPO"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de combinación que se debe realizar."
+                  name="JoinType"
+                  typeConverter="JoinType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de columnas de la clave de ordenación."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores NULL se tratan como valores iguales."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indica la cantidad máxima solicitada de búferes por entrada antes del bloqueo."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada izquierda de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[OrderDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="OrderDate"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[OrderDate]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[Anio]"
+                      cachedDataType="i4"
+                      cachedName="Anio"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[Anio]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[Trimestre]"
+                      cachedDataType="i4"
+                      cachedName="Trimestre"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[Trimestre]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[Mes]"
+                      cachedDataType="i4"
+                      cachedName="Mes"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[Mes]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[Semana]"
+                      cachedDataType="i4"
+                      cachedName="Semana"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[Semana]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[DiaDeAnio]"
+                      cachedDataType="i4"
+                      cachedName="DiaDeAnio"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[DiaDeAnio]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[DiaDeMes]"
+                      cachedDataType="i4"
+                      cachedName="DiaDeMes"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[DiaDeMes]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[DiaDeSemana]"
+                      cachedDataType="i4"
+                      cachedName="DiaDeSemana"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[DiaDeSemana]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada derecha de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla].Columns[Tiempo_FechaActual]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Tiempo_FechaActual"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_FechaActual]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla].Columns[Tiempo_Anio]"
+                      cachedDataType="i4"
+                      cachedName="Tiempo_Anio"
+                      lineageId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_Anio]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla].Columns[Tiempo_Trimestre]"
+                      cachedDataType="i4"
+                      cachedName="Tiempo_Trimestre"
+                      lineageId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_Trimestre]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla].Columns[Tiempo_Mes]"
+                      cachedDataType="i4"
+                      cachedName="Tiempo_Mes"
+                      lineageId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_Mes]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla].Columns[Tiempo_Semana]"
+                      cachedDataType="i4"
+                      cachedName="Tiempo_Semana"
+                      lineageId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_Semana]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla].Columns[Tiempo_DiaDeAnio]"
+                      cachedDataType="i4"
+                      cachedName="Tiempo_DiaDeAnio"
+                      lineageId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_DiaDeAnio]" />
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla].Columns[Tiempo_DiaDeMes]"
+                      cachedDataType="i4"
+                      cachedName="Tiempo_DiaDeMes"
+                      lineageId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_DiaDeMes]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla]"
+                  isSorted="true"
+                  name="Salida de combinación de mezcla">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[OrderDate]"
+                      name="OrderDate"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[OrderDate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Anio]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Anio]"
+                      name="Anio">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[Anio]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Trimestre]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Trimestre]"
+                      name="Trimestre">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[Trimestre]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Mes]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Mes]"
+                      name="Mes">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[Mes]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Semana]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Semana]"
+                      name="Semana">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[Semana]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[DiaDeAnio]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[DiaDeAnio]"
+                      name="DiaDeAnio">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[DiaDeAnio]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[DiaDeMes]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[DiaDeMes]"
+                      name="DiaDeMes">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[DiaDeMes]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[DiaDeSemana]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[DiaDeSemana]"
+                      name="DiaDeSemana">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla].Columns[DiaDeSemana]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_FechaActual]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_FechaActual]"
+                      name="Tiempo_FechaActual">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla].Columns[Tiempo_FechaActual]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_Anio]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_Anio]"
+                      name="Tiempo_Anio">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla].Columns[Tiempo_Anio]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_Trimestre]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_Trimestre]"
+                      name="Tiempo_Trimestre">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla].Columns[Tiempo_Trimestre]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_Mes]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_Mes]"
+                      name="Tiempo_Mes">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla].Columns[Tiempo_Mes]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_Semana]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_Semana]"
+                      name="Tiempo_Semana">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla].Columns[Tiempo_Semana]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_DiaDeAnio]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_DiaDeAnio]"
+                      name="Tiempo_DiaDeAnio">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla].Columns[Tiempo_DiaDeAnio]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_DiaDeMes]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla].Columns[Tiempo_DiaDeMes]"
+                      name="Tiempo_DiaDeMes">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla].Columns[Tiempo_DiaDeMes]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Carga Stage Tiempo\Northwind Orders"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="Northwind Orders"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT Distinct(OrderDate),
+		YEAR(OrderDate) AS Anio,
+		DATEPART(QUARTER,OrderDate) as Trimestre,
+		DATEPART(MONTH,OrderDate) as Mes,
+		DATEPART(WEEK,OrderDate) as Semana,
+		DATEPART(DAYOFYEAR,OrderDate) as DiaDeAnio,
+		DATEPART(DAY,OrderDate) as DiaDeMes,
+		DATEPART(WEEKDAY,OrderDate-1) as DiaDeSemana
+		FROM NORTHWND.DBO.Orders;</property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Carga Stage Tiempo\Northwind Orders.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.NORTHWND]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.NORTHWND]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[OrderDate]"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[OrderDate]"
+                      name="OrderDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Anio]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[Anio]"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Anio]"
+                      name="Anio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Trimestre]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[Trimestre]"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Trimestre]"
+                      name="Trimestre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Mes]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[Mes]"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Mes]"
+                      name="Mes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Semana]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[Semana]"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Semana]"
+                      name="Semana"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[DiaDeAnio]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[DiaDeAnio]"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[DiaDeAnio]"
+                      name="DiaDeAnio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[DiaDeMes]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[DiaDeMes]"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[DiaDeMes]"
+                      name="DiaDeMes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[DiaDeSemana]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[DiaDeSemana]"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[DiaDeSemana]"
+                      name="DiaDeSemana"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      name="OrderDate" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[Anio]"
+                      dataType="i4"
+                      name="Anio" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[Trimestre]"
+                      dataType="i4"
+                      name="Trimestre" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[Mes]"
+                      dataType="i4"
+                      name="Mes" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[Semana]"
+                      dataType="i4"
+                      name="Semana" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[DiaDeAnio]"
+                      dataType="i4"
+                      name="DiaDeAnio" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[DiaDeMes]"
+                      dataType="i4"
+                      name="DiaDeMes" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].ExternalColumns[DiaDeSemana]"
+                      dataType="i4"
+                      name="DiaDeSemana" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[OrderDate]"
+                      name="OrderDate" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[Anio]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[Anio]"
+                      name="Anio" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[Trimestre]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[Trimestre]"
+                      name="Trimestre" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[Mes]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[Mes]"
+                      name="Mes" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[Semana]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[Semana]"
+                      name="Semana" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[DiaDeAnio]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[DiaDeAnio]"
+                      name="DiaDeAnio" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[DiaDeMes]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[DiaDeMes]"
+                      name="DiaDeMes" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[DiaDeSemana]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[DiaDeSemana]"
+                      name="DiaDeSemana" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Carga Stage Tiempo\Ordenar Orders"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="Ordenar Orders"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Carga Stage Tiempo\Ordenar Orders.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Inputs[Entrada de ordenación].Columns[OrderDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="OrderDate"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[OrderDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Inputs[Entrada de ordenación].Columns[Anio]"
+                      cachedDataType="i4"
+                      cachedName="Anio"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Anio]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Inputs[Entrada de ordenación].Columns[Trimestre]"
+                      cachedDataType="i4"
+                      cachedName="Trimestre"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Trimestre]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Inputs[Entrada de ordenación].Columns[Mes]"
+                      cachedDataType="i4"
+                      cachedName="Mes"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Mes]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Inputs[Entrada de ordenación].Columns[Semana]"
+                      cachedDataType="i4"
+                      cachedName="Semana"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Semana]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Inputs[Entrada de ordenación].Columns[DiaDeAnio]"
+                      cachedDataType="i4"
+                      cachedName="DiaDeAnio"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[DiaDeAnio]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Inputs[Entrada de ordenación].Columns[DiaDeMes]"
+                      cachedDataType="i4"
+                      cachedName="DiaDeMes"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[DiaDeMes]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Inputs[Entrada de ordenación].Columns[DiaDeSemana]"
+                      cachedDataType="i4"
+                      cachedName="DiaDeSemana"
+                      lineageId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[DiaDeSemana]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[OrderDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[OrderDate]"
+                      name="OrderDate"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[OrderDate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[Anio]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[Anio]"
+                      name="Anio">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Anio]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[Trimestre]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[Trimestre]"
+                      name="Trimestre">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Trimestre]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[Mes]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[Mes]"
+                      name="Mes">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Mes]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[Semana]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[Semana]"
+                      name="Semana">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[Semana]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[DiaDeAnio]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[DiaDeAnio]"
+                      name="DiaDeAnio">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[DiaDeAnio]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[DiaDeMes]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[DiaDeMes]"
+                      name="DiaDeMes">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[DiaDeMes]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[DiaDeSemana]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación].Columns[DiaDeSemana]"
+                      name="DiaDeSemana">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB].Columns[DiaDeSemana]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Carga Stage Tiempo\ordenar StageTiempo"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="ordenar StageTiempo"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Inputs[Entrada de ordenación].Columns[Tiempo_Skey]"
+                      cachedDataType="i4"
+                      cachedName="Tiempo_Skey"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Skey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Inputs[Entrada de ordenación].Columns[Tiempo_FechaActual]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Tiempo_FechaActual"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_FechaActual]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Inputs[Entrada de ordenación].Columns[Tiempo_Anio]"
+                      cachedDataType="i4"
+                      cachedName="Tiempo_Anio"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Anio]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Inputs[Entrada de ordenación].Columns[Tiempo_Trimestre]"
+                      cachedDataType="i4"
+                      cachedName="Tiempo_Trimestre"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Trimestre]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Inputs[Entrada de ordenación].Columns[Tiempo_Mes]"
+                      cachedDataType="i4"
+                      cachedName="Tiempo_Mes"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Mes]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Inputs[Entrada de ordenación].Columns[Tiempo_Semana]"
+                      cachedDataType="i4"
+                      cachedName="Tiempo_Semana"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Semana]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Inputs[Entrada de ordenación].Columns[Tiempo_DiaDeAnio]"
+                      cachedDataType="i4"
+                      cachedName="Tiempo_DiaDeAnio"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_DiaDeAnio]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Inputs[Entrada de ordenación].Columns[Tiempo_DiaDeMes]"
+                      cachedDataType="i4"
+                      cachedName="Tiempo_DiaDeMes"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_DiaDeMes]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_Skey]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_Skey]"
+                      name="Tiempo_Skey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Skey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_FechaActual]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_FechaActual]"
+                      name="Tiempo_FechaActual"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_FechaActual]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_Anio]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_Anio]"
+                      name="Tiempo_Anio">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Anio]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_Trimestre]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_Trimestre]"
+                      name="Tiempo_Trimestre">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Trimestre]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_Mes]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_Mes]"
+                      name="Tiempo_Mes">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Mes]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_Semana]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_Semana]"
+                      name="Tiempo_Semana">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Semana]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_DiaDeAnio]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_DiaDeAnio]"
+                      name="Tiempo_DiaDeAnio">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_DiaDeAnio]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_DiaDeMes]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación].Columns[Tiempo_DiaDeMes]"
+                      name="Tiempo_DiaDeMes">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_DiaDeMes]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Carga Stage Tiempo\StageTiempo"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="StageTiempo"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[Stage_Tiempo]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Carga Stage Tiempo\StageTiempo.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.stage_northwind]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.stage_northwind]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Skey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_Skey]"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Skey]"
+                      name="Tiempo_Skey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_FechaActual]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_FechaActual]"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_FechaActual]"
+                      name="Tiempo_FechaActual"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Anio]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_Anio]"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Anio]"
+                      name="Tiempo_Anio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Trimestre]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_Trimestre]"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Trimestre]"
+                      name="Tiempo_Trimestre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Mes]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_Mes]"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Mes]"
+                      name="Tiempo_Mes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Semana]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_Semana]"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_Semana]"
+                      name="Tiempo_Semana"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_DiaDeAnio]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_DiaDeAnio]"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_DiaDeAnio]"
+                      name="Tiempo_DiaDeAnio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_DiaDeMes]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_DiaDeMes]"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_DiaDeMes]"
+                      name="Tiempo_DiaDeMes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_DiaDeSemana]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_DiaDeSemana]"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].Columns[Tiempo_DiaDeSemana]"
+                      name="Tiempo_DiaDeSemana"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_Skey]"
+                      dataType="i4"
+                      name="Tiempo_Skey" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_FechaActual]"
+                      dataType="dbTimeStamp"
+                      name="Tiempo_FechaActual" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_Anio]"
+                      dataType="i4"
+                      name="Tiempo_Anio" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_Trimestre]"
+                      dataType="i4"
+                      name="Tiempo_Trimestre" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_Mes]"
+                      dataType="i4"
+                      name="Tiempo_Mes" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_Semana]"
+                      dataType="i4"
+                      name="Tiempo_Semana" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_DiaDeAnio]"
+                      dataType="i4"
+                      name="Tiempo_DiaDeAnio" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_DiaDeMes]"
+                      dataType="i4"
+                      name="Tiempo_DiaDeMes" />
+                    <externalMetadataColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Tiempo_DiaDeSemana]"
+                      dataType="i4"
+                      name="Tiempo_DiaDeSemana" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_Skey]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_Skey]"
+                      name="Tiempo_Skey" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_FechaActual]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_FechaActual]"
+                      name="Tiempo_FechaActual" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_Anio]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_Anio]"
+                      name="Tiempo_Anio" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_Trimestre]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_Trimestre]"
+                      name="Tiempo_Trimestre" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_Mes]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_Mes]"
+                      name="Tiempo_Mes" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_Semana]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_Semana]"
+                      name="Tiempo_Semana" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_DiaDeAnio]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_DiaDeAnio]"
+                      name="Tiempo_DiaDeAnio" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_DiaDeMes]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_DiaDeMes]"
+                      name="Tiempo_DiaDeMes" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_DiaDeSemana]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Tiempo_DiaDeSemana]"
+                      name="Tiempo_DiaDeSemana" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Carga Stage Tiempo.Paths[FECHAS_NUEVAS]"
+              endId="Package\Carga Stage Tiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+              name="FECHAS_NUEVAS"
+              startId="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS.Outputs[FECHAS_NUEVAS]" />
+            <path
+              refId="Package\Carga Stage Tiempo.Paths[Salida de combinación de mezcla]"
+              endId="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS.Inputs[Entrada de división condicional]"
+              name="Salida de combinación de mezcla"
+              startId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Outputs[Salida de combinación de mezcla]" />
+            <path
+              refId="Package\Carga Stage Tiempo.Paths[Salida de ordenación]"
+              endId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada izquierda de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\Carga Stage Tiempo\Ordenar Orders.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\Carga Stage Tiempo.Paths[Salida de ordenación1]"
+              endId="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO.Inputs[Entrada derecha de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\Carga Stage Tiempo\ordenar StageTiempo.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\Carga Stage Tiempo.Paths[Salida de origen de OLE DB]"
+              endId="Package\Carga Stage Tiempo\ordenar StageTiempo.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\Carga Stage Tiempo\StageTiempo.Outputs[Salida de origen de OLE DB]" />
+            <path
+              refId="Package\Carga Stage Tiempo.Paths[Salida de origen de OLE DB1]"
+              endId="Package\Carga Stage Tiempo\Ordenar Orders.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\Carga Stage Tiempo\Northwind Orders.Outputs[Salida de origen de OLE DB]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="174.4,41.6"
+          Id="Package\Carga Stage Tiempo"
+          TopLeft="233.055542821962,20.7999998553594" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Carga Stage Tiempo">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="160,41.6"
+          Id="Package\Carga Stage Tiempo\Northwind Orders"
+          TopLeft="77.3214243467721,41.3833330455588" />
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\Carga Stage Tiempo\ordenar StageTiempo"
+          TopLeft="424.999976779025,142.999999005596" />
+        <NodeLayout
+          Size="258.4,41.6"
+          Id="Package\Carga Stage Tiempo\LEFT JOIN ORDERS_STAGETIEMPO"
+          TopLeft="192.499989482264,237.033331685033" />
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\Carga Stage Tiempo\StageTiempo"
+          TopLeft="437.916642739956,29.4666664617592" />
+        <NodeLayout
+          Size="151.2,43.2"
+          Id="Package\Carga Stage Tiempo\Ordenar Orders"
+          TopLeft="77.4999957655869,143.433332335916" />
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Carga Stage Tiempo\Destino de OLE DB"
+          TopLeft="566.025610099365,319.128203037407" />
+        <NodeLayout
+          Size="212,41.6"
+          Id="Package\Carga Stage Tiempo\FILTRAR FECHAS NUEVAS"
+          TopLeft="209.166655238304,320.066664961113" />
+        <EdgeLayout
+          Id="Package\Carga Stage Tiempo.Paths[Salida de origen de OLE DB]"
+          TopLeft="511.25830975949,71.0666664617592">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,71.9333325438365"
+              Start="0,0"
+              End="0,64.4333325438365">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.4333325438365" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Carga Stage Tiempo.Paths[Salida de ordenación1]"
+          TopLeft="514.599976779025,184.599999005596">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-151.166653963427,52.4333326794374"
+              Start="0,0"
+              End="-151.166653963427,44.9333326794374">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.2663996100768" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.2663996100768"
+                    Point2="0,31.2663996100768"
+                    Point3="-4,31.2663996100768" />
+                  <mssgle:LineSegment
+                    End="-147.166653963427,31.2663996100768" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-147.166653963427,31.2663996100768"
+                    Point2="-151.166653963427,31.2663996100768"
+                    Point3="-151.166653963427,35.2663996100768" />
+                  <mssgle:LineSegment
+                    End="-151.166653963427,44.9333326794374" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Carga Stage Tiempo.Paths[Salida de ordenación]"
+          TopLeft="153.099995765587,186.633332335916">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="126.866660383344,50.3999993491172"
+              Start="0,0"
+              End="126.866660383344,42.8999993491172">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.0539073041813" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.0539073041813"
+                    Point2="0,30.0539073041813"
+                    Point3="4,30.0539073041813" />
+                  <mssgle:LineSegment
+                    End="122.866660383344,30.0539073041813" />
+                  <mssgle:CubicBezierSegment
+                    Point1="122.866660383344,30.0539073041813"
+                    Point2="126.866660383344,30.0539073041813"
+                    Point3="126.866660383344,34.0539073041813" />
+                  <mssgle:LineSegment
+                    End="126.866660383344,42.8999993491172" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Carga Stage Tiempo.Paths[Salida de combinación de mezcla]"
+          TopLeft="318.433322360284,278.633331685033">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.4333332760798"
+              Start="0,0"
+              End="0,33.9333332760798">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.9333332760798" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Carga Stage Tiempo.Paths[FECHAS_NUEVAS]"
+          TopLeft="421.166655238304,340.39743399926">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="144.858954861061,0"
+              Start="0,0"
+              End="137.358954861061,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="137.358954861061,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="29.6769969617805,5,78.0049609375,10.8671875"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Carga Stage Tiempo.Paths[Salida de origen de OLE DB1]"
+          TopLeft="155.21071005618,82.9833330455588">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.4499992903571"
+              Start="0,0"
+              End="0,52.9499992903571">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.9499992903571" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Carga Stage Tiempo\Northwind Orders">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Carga Stage Tiempo\StageTiempo">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Carga Stage Tiempo\Destino de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
